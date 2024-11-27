@@ -105,7 +105,7 @@
                     <div class="pt-2">
                         <a href="contact.html" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2">talk to our friendly Bot</a>
                         
-                        <a href="about.html" class="btn btn-primary rounded-pill py-3 px-5 my-2">About</a>
+                        <a href="login.html" class="btn btn-primary rounded-pill py-3 px-5 my-2">Sign in/ login Psychaitrist</a>
                     </div>
                 </div>
             </div>
@@ -215,6 +215,67 @@
                     allowfullscreen>
                 </iframe>
                 
+                <h4 class="mb-3">Rate the website</h4>
+                <style>
+                    .rating {
+                      display: flex;
+                      flex-direction: row-reverse;
+                      justify-content: center;
+                    }
+                
+                    .rating input {
+                      display: none;
+                    }
+                
+                    .rating label {
+                      font-size: 2rem;
+                      color: #ccc;
+                      cursor: pointer;
+                    }
+                
+                    .rating input:checked ~ label {
+                      color: #f5b301;
+                    }
+                
+                    .rating input:hover ~ label,
+                    .rating label:hover,
+                    .rating label:hover ~ label {
+                      color: #ffdd57;
+                    }
+                  </style>
+              <div class="rating">
+                <input type="radio" name="rating" id="star5" value="5">
+                <label for="star5">★</label>
+                <input type="radio" name="rating" id="star4" value="4">
+                <label for="star4">★</label>
+                <input type="radio" name="rating" id="star3" value="3">
+                <label for="star3">★</label>
+                <input type="radio" name="rating" id="star2" value="2">
+                <label for="star2">★</label>
+                <input type="radio" name="rating" id="star1" value="1">
+                <label for="star1">★</label>
+
+                <a class="btn btn-lg btn-primary rounded-pill" button id="submitRating">Submit</button> </a>
+              </div>
+           
+              <script>
+                 submitRating.onclick = function() {
+    const rating = document.querySelector('input[name="rating"]:checked');
+    if (rating) {
+      alert(`Thank you for rating us ${rating.value} star(s)!`);
+      modal.style.display = "none";
+    } else {
+      alert("Please select a rating before submitting.");
+    }
+  }
+                document.querySelectorAll('.rating input').forEach((input) => {
+                  input.addEventListener('change', () => {
+                    console.log(`You rated this ${input.value} stars!`);
+                  });
+                });
+              </script>
+
+
                 </div>
                 
                 
