@@ -143,21 +143,54 @@
     <div class="container-fluid bg-primary my-5 py-5">
         <div class="container py-5">
             <div class="text-center mx-auto mb-5" style="max-width: 500px;">
-                <h5 class="d-inline-block text-white text-uppercase border-bottom border-5">Find A Doctor</h5>
+                <h5 class="d-inline-block text-white text-uppercase border-bottom border-5">Help as a Doctor</h5>
                 <h1 class="display-4 mb-4">Find A Healthcare Professionals</h1>
-                <h5 class="text-white fw-normal">Duo ipsum erat stet dolor sea ut nonumy tempor. Tempor duo lorem eos sit sed ipsum takimata ipsum sit est. Ipsum ea voluptua ipsum sit justo</h5>
+                <h5 class="text-white fw-normal">As a Qualified Psychaitrist we are to help those whom need help. Signup and lets save a life and make a difference</h5>
             </div>
             <div class="mx-auto" style="width: 100%; max-width: 600px;">
                 <div class="input-group">
-                    <select class="form-select border-primary w-25" style="height: 60px;">
-                        <option selected>Department</option>
-                        <option value="1">Department 1</option>
-                        <option value="2">Department 2</option>
-                        <option value="3">Department 3</option>
-                    </select>
-                    <input type="text" class="form-control border-primary w-50" placeholder="Keyword">
-                    <button class="btn btn-dark border-0 w-25">Search</button>
-
+                                <div class="ai-box">
+                        <h2>Ask AI</h2>
+                        <input type="text" class="form-control border-primary w-200" id="question" placeholder="Type your question..." />
+                        <button onclick="askAI() "  >Get Answer</button>
+                        <div class="response" id="response">AI will answer here.</div>
+                      </div>
+                      
+                      <script>
+                        async function askAI() {
+                          const question = document.getElementById('question').value;
+                          const responseElement = document.getElementById('response');
+                          
+                          if (!question) {
+                            responseElement.textContent = "Please enter a question.";
+                            return;
+                          }
+                      
+                          responseElement.textContent = "Thinking...";
+                      
+                          try {
+                            
+                            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                              method: 'POST',
+                              headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': 'Bearer YOUR_API_KEY'
+                              },
+                              body: JSON.stringify({
+                                model: 'gpt-4',
+                                messages: [{ role: 'user', content: question }]
+                              })
+                            });
+                      
+                            const data = await response.json();
+                            const answer = data.choices[0].message.content;
+                            responseElement.textContent = answer;
+                          } catch (error) {
+                            responseElement.textContent = "Error: Unable to fetch response. Open Contact tab and use one of our platforms";
+                            console.error(error);
+                          }
+                        }
+                      </script>
                     
                 </div>
             </div>
